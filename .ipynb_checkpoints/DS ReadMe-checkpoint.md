@@ -20,7 +20,28 @@ Because I had a wealth of data, I decided to set aside a holdout dataset after I
 
 Due to the size of the available dataset, and concerns regarding computation time, I decided to run my initial analysis on 30% of the remaining dataset, or 24% of the overall dataset. This was 13,828 post titles - fairly evenly split between the two subreddits: 6920 to futurology, 6908 to collapse. This is essentially a 50% split, so this served as the initial null baseline. The model will need to demonstrate the ability to choose the correct subreddit of origin at a higher rate than merely choosing 'Futurology' each time.
 
-In creating a custom stoplist for the model, an effort was made to add forms of future/collapse, or formats that the subreddit name may be included in the posts so that the model would not have an unnatural advantage. This negatively affected performance, of course, but provides what may be a sounder methodoloy.
+In creating a custom stoplist for the model, an effort was made to add forms of future/collapse, or formats that the subreddit name may be included in the posts so that the model would not have an unnatural advantage. This negatively affected performance, of course, but provides what may be a sounder methodology for identifying an individuals worldview or expectations for the future via their post language.
 
+With the data in hand, I proceeded to run many variations of models in order to find the model that generates the most accurate predictions, after either count vectorizing the data or vectorizing the data via TF-IDF.. The models run included:
 
+* Multinomial Naive Bayes
+* Gaussian Baive Bayes
+* Logistic Regression
+* K Nearest Neighbors Regression
+* Decision Tree 
+* Random Forest
+* AdaBoost
+* Ensemble Analysis
+
+The best performing models incorporated Naive Bayes, with the model utilizing TF-IDF vectorization being the most accurate. Further reading regarding TF-IDF vectorization, provided by experienced data scientists can be found below. TFI-DF does not necessarily rely on word count. The method provides more weighting to a word if it occurs often in a certain submission title, but will reduce its importance in the model if that same word shows up in many of the titles.
+
+* https://towardsdatascience.com/text-vectorization-term-frequency-inverse-document-frequency-tfidf-5a3f9604da6d
+* https://www.linkedin.com/pulse/count-vectorizers-vs-tfidf-natural-language-processing-sheel-saket/
+
+Naive Bayes Classifier is a surpervised learning technique that generates the probability that a post belongs to a certain class given the words that are in the title, and selects the class with the highest probability. This is an extremely simplified explanation, but further reading can be found below as well.
+https://jakevdp.github.io/PythonDataScienceHandbook/05.05-naive-bayes.html
+
+This TF-IDF model, after incorporating the customized list of stop-words, generated an accuracy rate of the test set (using 30% after the holdout was removed) of 80.44%. Using just the list of standard English stop-words yielded an accuracy rate of 82.21% on this test set.
+
+When this model was fit run on 100% of the dataset (after holdout removed), the model had an accuracy rate of 82.77%, improving as the model saw more data. The model performed with 81.7% accuracy on the holdout set, which is 20% of the overall datset initially scraped from Reddit. This is well above the 50% baseline that was initially set.
 
