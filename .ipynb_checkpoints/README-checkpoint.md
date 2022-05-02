@@ -45,7 +45,7 @@ Naive Bayes Classifier is a supervised learning method that will generate the pr
 ***Results***
 This model, after incorporating the customized list of stop-words, generated an accuracy rate of the test set (using 30% after the holdout was removed) of 80.8%. Using just the list of standard English stop-words yielded an accuracy rate of 82.3% on this test set.
 
-When this model was fit run on 100% of the training/validation dataset, the model had an accuracy rate of 82.8%, improving as the model saw more data. The model performed with **82% accuracy on the holdout set**, which is 20% of the overall dataset initially scraped from Reddit. This is well above the 50.3% baseline derived from the percentage of the majority class in this dataset.
+When this model was fit run on 100% of the training/validation dataset, the model had an accuracy rate of 82.8%, improving as the model saw more data. The model performed with **81.67% accuracy on the holdout set**, which is 20% of the overall dataset initially scraped from Reddit. This is well above the 50.3% baseline derived from the percentage of the majority class in this dataset.
 
 ***Qualitative Analysis***
 Qualitative analysis of the words and terms with the most impact on the model were telling:
