@@ -1,181 +1,81 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 3: Web APIs & NLP
+**Subreddit NPL Classification Modeling**
 
-### Description
+Many feel that humanity is at a major inflection point. Technological progress is rapid: cars are driving themselves and running on electricity, mundane tasks are being automated, and AI is contributing to providing solutions across many fields of study. There is much to be excited about. But - how can you be? Every week, updates on the state of the climate become more dire, the geopolitical landscape becomes more fraught, and the social fabric that binds us all together seems to fray. Where do you feel that civilization is headed? Where might your customers? Or the members of your next target market?
 
-In week four we've learned about a few different classifiers. In week five we'll learn about webscraping, APIs, and Natural Language Processing (NLP). This project will put those skills to the test.
+In an effort to utilize natural language processing (NPL) to try to determine an individual's worldview via their Reddit activity, we have used the Reddit Pushshift API to collect submissions to two Subreddit pages: r/collapse and r/futurology. The members of each community have self-identified as having conflicting views of the future of humanity. The Futurology Subreddit takes a more positive view on the path forward for humans, technology, and civilization. Members of the collapse community adopt a more pessimistic view for the decades ahead. Below are the respective descriptions for these communities, as stated by their administrators:
 
-For project 3, your goal is two-fold:
-1. Using [Pushshift's](https://github.com/pushshift/api) API, you'll collect posts from two subreddits of your choosing.
-2. You'll then use NLP to train a classifier on which subreddit a given post came from. This is a binary classification problem.
+**Collapse of Civilization**
+*r/collapse*
+Discussion regarding the potential collapse of global civilization, defined as a significant decrease in human population and/or political/economic/social complexity over a considerable area, for an extended time. We seek to deepen our understanding of collapse while providing mutual support, not to document every detail of our demise.
 
-
-#### About the API
-
-Pushshift's API is fairly straightforward. For example, if I want the posts from [`/r/boardgames`](https://www.reddit.com/r/boardgames), all I have to do is use the following url: https://api.pushshift.io/reddit/search/submission?subreddit=boardgames
-
-To help you get started, we have a primer video on how to use the API: https://youtu.be/AcrjEWsMi_E
-
----
-## Checkpoints and Advice
-
-If you aren't familiar with [reddit](https://www.reddit.com/), go check it out and browse different subreddits. Each subreddit is like a forum on a different topic. [Here's a list of subreddits by topic.](https://www.reddit.com/r/ListOfSubreddits/wiki/listofsubreddits)
-
-- In your project you can classify posts, comments, titles, or some combination of those things. What you choose will partly determine how difficult your data cleaning will be and how challenging the classification task will be for your algorithms. In your presentation and executive summary, **tell us what you used**.
-- You can also include other information from posts or comments as features, but you must include some text.
-- You can make the project more challenging by choosing subreddits that are more similar.
-- **By the EOD Friday, 4/22/2022, you must input your chosen subreddits into [this google doc.](https://docs.google.com/spreadsheets/d/170buASiuu6NmJjCBlsnHHgyPobOGO0sDKFaTTvxMbsc/edit#gid=0) You may not choose the same two subreddits as one of your peers: first come, first served.** Please include a breakdown of the post count for each as well.
-- You should aim to have a function built to pull down data from the API by this date (4/22/22) as well.
-- The more data you can pull the better for your classifier. **You will want data from at least 3000 unique, non-null posts from each subreddit.**
-
----
-
-### Requirements
-
-- Gather and prepare your data using the `requests` library.
-- **Create and compare at least two models**. These can be any classifier of your choosing: logistic regression, Naive Bayes, KNN, SVM, Random Forest Classifier, etc.
-  - **Bonus**: use a Naive Bayes classifier
-- You **must** build a robust commit history on GHE for this project, with the first commit no later than next Monday, 4/25/22.
-- A Jupyter Notebook with your analysis for a peer audience of data scientists.
-- An executive summary of your results.
-- A short presentation outlining your process and findings for a semi-technical audience.
-
-**Pro Tip:** You can find a good example executive summary [here](https://www.proposify.biz/blog/executive-summary).
-
----
-
-### Necessary Deliverables / Submission
-
-- Code and executive summary must be in a clearly commented Jupyter Notebook.
-- You must submit your slide deck.
-- Materials must be submitted by **11:59 PM EST on Monday, May 2nd 2022**.
-- Presentation must be ready by **09:00 AM EST on Monday, May 2nd 2022**.
-
----
-
-## Rubric
-You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
-
-For Project 3 the evaluation categories are as follows:<br>
-**The Data Science Process**
-- Problem Statement
-- Data Collection
-- Data Cleaning & EDA
-- Preprocessing & Modeling
-- Evaluation and Conceptual Understanding
-- Conclusion and Recommendations
-
-**Organization and Professionalism**
-- Organization
-- Visualizations
-- Python Syntax and Control Flow
-- Presentation
-
-**Scores will be out of 30 points based on the 10 categories in the rubric.** <br>
-*3 points per section*<br>
-
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
+**Future(s) Studies**
+*r/Futurology*
+Welcome to r/Futurology, a subreddit devoted to the field of Future(s) Studies and speculation about the development of humanity, technology, and civilization.
 
 
-### The Data Science Process
+***Problem Statement***
+The primary purpose of this analysis will be to develop a model that can accurately identify posts as originating from the Futurology Subreddit ot from Collapse, via the text content of their titles. A secondary, further application would be to apply this analysis to other social media posts or content to assess the author's general outlook on the future of civilization.
 
-**Problem Statement**
-- Is it clear what the goal of the project is?
-- What type of model will be developed?
-- How will success be evaluated?
-- Is the scope of the project appropriate?
-- Is it clear who cares about this or why this is important to investigate?
-- Does the student consider the audience and the primary and secondary stakeholders?
+***Data Collection***
+Using Puhsshift API, collected Subreddit submissions that contained self-text from Sunday April 24th back to the inception of the subreddits provided a wealth of data on both Subreddits: 28,876 posts on Futurology and 28,741 for Collapse. We proceeded with analyzing post titles alone for this study because 32% of the total submissions had self-text removed. Options for further research include utilizing the available self-text, as well as the titles for historic submissions that do not include self-text.
 
-**Data Collection**
-- Was enough data gathered to generate a significant result?
-- Was data collected that was useful and relevant to the project?
-- Was data collection and storage optimized through custom functions, pipelines, and/or automation?
-- Was thought given to the server receiving the requests such as considering number of requests per second?
+***Process***
+Due to the wealth of available data, a holdout dataset comprising 20% of the available data was set aside to be tested after modeling process completed on training and validation sets.
 
-**Data Cleaning and EDA**
-- Are missing values imputed/handled appropriately?
-- Are distributions examined and described?
-- Are outliers identified and addressed?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
-- Does the student address whether or not they are likely to be able to answer their problem statement with the provided data given what they've discovered during EDA?
+Initial analysis was run on 30% of the remaining dataset, or 24% of the overall dataset. The dataset was split virtually 50%/50% between Futurology and Collapse, so this served as the initial null baseline. The model will need to demonstrate the ability to choose the correct Subreddit of origin at a higher rate than merely choosing 'Futurology' each time in order to be considered successful.
 
-**Preprocessing and Modeling**
-- Is text data successfully converted to a matrix representation?
-- Are methods such as stop words, stemming, and lemmatization explored?
-- Does the student properly split and/or sample the data for validation/training purposes?
-- Does the student test and evaluate a variety of models to identify a production algorithm (**AT MINIMUM:** two classification models, **BONUS:** try a Naive Bayes)?
-- Does the student defend their choice of production model relevant to the data at hand and the problem?
-- Does the student explain how the model works and evaluate its performance successes/downfalls?
+In creating a custom stoplist for the model, an effort was made to add forms of future/collapse, as well as the subreddit's name. This negatively affected performance. However, it may provide what may be a sounder methodology for identifying an individual's worldview or expectations for the future via their post language.
 
-**Evaluation and Conceptual Understanding**
-- Does the student accurately identify and explain the baseline score?
-- Does the student select and use metrics relevant to the problem objective?
-- Does the student interpret the results of their model for purposes of inference?
-- Is domain knowledge demonstrated when interpreting results?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
+***Modeling***
+Many supervised learning models were tested in order to identify the model best fit for classifying the submissions, after either count vectorizing the data or vectorizing the data via TF-IDF. The models run included:
 
-**Conclusion and Recommendations**
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
-- Does the conclusion answer the original problem statement?
-- Does the student address how findings of this research can be applied for the benefit of stakeholders?
-- Are future steps to move the project forward identified?
+* Multinomial Naive Bayes
+* Gaussian Naive Bayes
+* Logistic Regression
+* K Nearest Neighbors Regression
+* Decision Tree 
+* Random Forest
+* AdaBoost
+* Ensemble Analysis
 
+The best performing models incorporated Naive Bayes, with the model utilizing TF-IDF vectorization being the most accurate. Further reading regarding TF-IDF vectorization provided by experienced data scientists can be found below. TFI-DF does not necessarily rely on word count alone. The method provides more weighting to a word if it occurs often in a certain submission title, but will reduce its influence in the model if that same word shows up in many of the titles.
 
-### Organization and Professionalism
+Naive Bayes Classifier is a supervised learning method that will generate the probability that, in this context, a post belongs to a certain thread given the words that are in the title, and selects the thread with the highest probability. This is a simple explanation, but further reading can be found below as well.
 
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
-- Is there a robust commit history?
+***Results***
+This model, after incorporating the customized list of stop-words, generated an accuracy rate of the test set (using 30% after the holdout was removed) of 80.8%. Using just the list of standard English stop-words yielded an accuracy rate of 82.3% on this test set.
 
-**Visualizations**
-- Are sufficient visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Are plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
+When this model was fit run on 100% of the training/validation dataset, the model had an accuracy rate of 82.8%, improving as the model saw more data. The model performed with **82% accuracy on the holdout set**, which is 20% of the overall dataset initially scraped from Reddit. This is well above the 50.3% baseline derived from the percentage of the majority class in this dataset.
 
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Are `sklearn` and `NLTK` methods used appropriately?
+***Qualitative Analysis***
+Qualitative analysis of the words and terms with the most impact on the model were telling:
+* Collapse Subreddit
+    * Community-oriented, supportive
+    * Strong survivalist community
+    * Humorous, profane
+    * Climate Change obsessed
 
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
+* Futurology Subreddit 
+    * Extending life, longevity
+    * Automation/robotics 
+    * Luxury, leisure oriented
 
 
----
+***Conclusion***
+We have developed a model that can predict whether Reddit user's post was intended for a techno-positive, future-optimistic forum or a thread with a more fatalistic view with 82% accuracy when introduced to new data. As the model encounters more data it improves in its accuracy. Using the findings of this NLP model may provide companies insight into a user's worldview or expectations of the future based on text that they have produced.
 
-### Why did we choose this project for you?
-This project covers three of the biggest concepts we cover in the class: Classification Modeling, Natural Language Processing and Data Wrangling/Acquisition.
+***For Further Research***
+*Self-Text Analysis*
+Quick analysis was performed using the same Naive Bayes model on both the title and self-text data. Titles alone were used for the previous analysis since self-text had been removed for such a large percentage of the posts. When the available self-text was added to the model and some hyperparameters tuned, the model achieved 84.64% accuracy on the validation set.
 
-Part 1 of the project focuses on **Data wrangling/gathering/acquisition**. This is a very important skill as not all the data you will need will be in clean CSVs or a single table in SQL.  There is a good chance that wherever you land you will have to gather some data from some unstructured/semi-structured sources; when possible, requesting information from an API, but often scraping it because they don't have an API (or it's terribly documented).
+*Sentiment Analysis*
+Develop and add sentiment analysis to model so model can better asses author's tone or intent. May lead to more accurate modeling, especially when the classes to be identified contain similar text, as was the case in this study.
 
-Part 2 of the project focuses on **Natural Language Processing** and converting standard text data (like Titles and Comments) into a format that allows us to analyze it and use it in modeling.
+*Expand Research to other Subreddits*
+This study partially intended to develop an understanding of the language used by Reddit users who identify themselves as having a certain worldview. Incorporating additional subreddits with similar attitudes could contribute to the development of a model that can predict a user's worldview based on their activity on other platforms or forums.  
 
-Part 3 of the project focuses on **Classification Modeling**.  Given that project 2 was a regression focused problem, we needed to give you a classification focused problem to practice the various models, means of assessment and preprocessing associated with classification.   
+***Further Reading***
+* https://towardsdatascience.com/text-vectorization-term-frequency-inverse-document-frequency-tfidf-5a3f9604da6d
+* https://www.linkedin.com/pulse/count-vectorizers-vs-tfidf-natural-language-processing-sheel-saket/
+* https://jakevdp.github.io/PythonDataScienceHandbook/05.05-naive-bayes.html
+
